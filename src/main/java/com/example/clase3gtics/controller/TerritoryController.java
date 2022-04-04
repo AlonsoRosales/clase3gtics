@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,17 @@ public class TerritoryController {
     }
 
     @PostMapping("/crear")
-    public String saveShip(Territory territorio) {
+    public String saveShip(Territory territorio, RedirectAttributes attributes) {
+        Optional<Territory> territo = territoryRepository.findById(territorio.getId());
+        if(territo.isPresent()){
+            attributes.addFlashAttribute("msg","El ID ya existe.Porfavor elegir otro.");
+            return "redirect:/territory/listarTerritorios";
+        }
+        if(territorio.getTerritorydescription().equalsIgnoreCase("")){
+            attributes.addFlashAttribute("msg","La descripcion del territorio no puede estar vacia");
+            return "redirect:/territory/listarTerritorios";
+        }
+        attributes.addFlashAttribute("msg","Territorio creado exitosamente.");
         territoryRepository.save(territorio);
         return "redirect:/territory/listarTerritorios";
     }
@@ -91,7 +102,11 @@ public class TerritoryController {
     }
 
     @PostMapping("/updateTerritorio")
-    public String updateTerritorio(Territory territorio) {
+    public String updateTerritorio(Territory territorio, RedirectAttributes attributes) {
+        if(territorio.getTerritorydescription().equalsIgnoreCase("")){
+            attributes.addFlashAttribute("msg","La descripcion del territorio no puede estar vacia");
+            return "redirect:/territory/listarTerritorios";
+        }
 
         territoryRepository.save(territorio);
         return "redirect:/territory/listarTerritorios";

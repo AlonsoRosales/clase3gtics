@@ -11,6 +11,7 @@
     <body>
         <div class="container">
             <h2 class="pb-2 pt-2 border-bottom">Lista de territorios</h2>
+            <div class="alert alert-info" th:text="${msg}" th:if="${msg != null}"></div>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{/territory/nuevoForm}">Nuevo Territorio</a>
             <table class="table table-sm">
                 <tr>
