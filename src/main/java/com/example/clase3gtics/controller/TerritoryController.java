@@ -79,7 +79,10 @@ public class TerritoryController {
             //------------------------------------------------------------------
             int index = 0;
             for(Region region: lista){
-                if(region.getId() == territorio.getRegionid().getId()){
+                /*if(region.getId() == territorio.getRegionid().getId()){
+                    break;
+                }*/
+                if(region.getId() == territorio.getRegionid()){
                     break;
                 }
                 index++;

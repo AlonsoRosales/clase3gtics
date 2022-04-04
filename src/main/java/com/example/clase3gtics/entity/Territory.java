@@ -12,9 +12,11 @@ public class Territory {
     @Column(name = "territorydescription", nullable = false, length = 50)
     private String territorydescription;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "regionid", nullable = false)
-    private Region regionid;
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "regionid", nullable = false)
+    @Column(name= "regionid")
+    //private Region regionid;
+    private int regionid;
 
     public String getId() {
         return id;
@@ -32,11 +34,19 @@ public class Territory {
         this.territorydescription = territorydescription;
     }
 
-    public Region getRegionid() {
+    /*public Region getRegionid() {
         return regionid;
     }
 
     public void setRegionid(Region regionid) {
+        this.regionid = regionid;
+    }*/
+
+    public int getRegionid() {
+        return regionid;
+    }
+
+    public void setRegionid(int regionid) {
         this.regionid = regionid;
     }
 }
